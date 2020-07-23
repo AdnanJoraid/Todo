@@ -8,9 +8,37 @@
 
 import SwiftUI
 
+var rowHeight : CGFloat = 50 //-> the height for the dynamic rows
+
 struct ContentView: View {
+    
+    @State var newTask = "" //-> stores user's new tasks
+    
+    //for testing the UI design/implementation
+    var simpleTasks : [String] = [
+    "Task one", "Task two","Task three"]
+    
     var body: some View {
-        Text("Hello, World!")
+        List{
+            //creating one view for every element
+            ForEach(simpleTasks, id: \.self) { item in
+                HStack {
+                    Text(item)
+                    Spacer()
+                    Image(systemName: "square")
+                        .imageScale(.large)
+                        .foregroundColor(.gray)
+                }
+            } .frame(height: rowHeight)
+            
+            HStack {
+                TextField("Add task...", text: $newTask, onCommit: {print("new Task titles entered")})
+                Image(systemName: "plus")
+                    .imageScale(.large)
+            }.frame(height: rowHeight)
+            
+        }
+        
     }
 }
 
