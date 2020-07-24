@@ -11,32 +11,40 @@ import SwiftUI
 var rowHeight : CGFloat = 50 //-> the height for the dynamic rows
 
 struct ContentView: View {
+    @Environment(\.managedObjectContext) var managedObjectContext //accessing device's internal storage
+    @FetchRequest(entity: Tasks.entity() , sortDescriptors: [NSSortDescriptor(keyPath: \Tasks.dateCreated, ascending: false)], predicate: NSPredicate(format: "taskDone = %d", false))
+     var fetchedItems : FetchedResults<Tasks>
     
     @State var newTask = "" //-> stores user's new tasks
-    
-    //for testing the UI design/implementation
-    var simpleTasks : [String] = [
-    "Task one", "Task two","Task three"]
+   
     
     var body: some View {
-        List{
-            //creating one view for every element
-            ForEach(simpleTasks, id: \.self) { item in
+        NavigationView{
+            List{
+                //creating one view for every element
+                ForEach(fetchedItems, id: \.self) { item in
+                    HStack {
+                        Text(item.taskTitle ?? "Empty")
+                        Spacer()
+                        Image(systemName: "square")
+                            .imageScale(.large)
+                            .foregroundColor(.gray)
+                    }
+                } .frame(height: rowHeight)
+                
                 HStack {
-                    Text(item)
-                    Spacer()
-                    Image(systemName: "square")
+                    TextField("Add task...", text: $newTask, onCommit: {print("new Task titles entered")})
+                    Image(systemName: "plus")
                         .imageScale(.large)
-                        .foregroundColor(.gray)
-                }
-            } .frame(height: rowHeight)
-            
-            HStack {
-                TextField("Add task...", text: $newTask, onCommit: {print("new Task titles entered")})
-                Image(systemName: "plus")
-                    .imageScale(.large)
-            }.frame(height: rowHeight)
-            
+                        .foregroundColor(.blue)
+                }.frame(height: rowHeight)
+                
+                Text("tasks done")
+                    .frame(height: rowHeight)
+                
+            }
+            .navigationBarTitle(Text("To-Do"))
+            .listStyle(GroupedListStyle()) //remove the separators below the last line
         }
         
     }
