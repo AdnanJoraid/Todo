@@ -35,7 +35,11 @@ struct ContentView: View {
                         }
                         
                     }
-                } .frame(height: rowHeight)
+                    
+                }
+                .onDelete(perform: removeItems)
+                .frame(height: rowHeight)
+                
                 
                 HStack {
                     TextField("Add task...", text: $newTaskTitle, onCommit: {self.saveTasks()})
@@ -44,12 +48,16 @@ struct ContentView: View {
                         .foregroundColor(.blue)
                 }.frame(height: rowHeight)
                 
-                Text("tasks done")
-                    .frame(height: rowHeight)
+                NavigationLink(destination: TasksDone()) {
+                    Text("tasks done")
+                        .frame(height: rowHeight)
+                }
+                
                 
             }
             .navigationBarTitle(Text("To-Do"))
                 .listStyle(GroupedListStyle()) //remove the separators below the last line
+            .navigationBarItems(trailing: EditButton())
         }
         
     }
@@ -70,6 +78,19 @@ struct ContentView: View {
             print(error.localizedDescription)
         }
         self.newTaskTitle = ""
+    }
+    
+    func removeItems(at offsets: IndexSet){
+        for index in offsets {
+            let item = fetchedItems[index]
+            managedObjectContext.delete((item))
+        }
+        do {
+            try managedObjectContext.save()
+        } catch {
+            print(error.localizedDescription)
+        }
+        
     }
     
     func markDoneTasks(at index: Int){

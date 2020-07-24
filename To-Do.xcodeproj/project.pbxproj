@@ -16,6 +16,7 @@
 		90D2465724C908BB00BD73F4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 90D2465524C908BB00BD73F4 /* LaunchScreen.storyboard */; };
 		90D2466224C908BC00BD73F4 /* To_DoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D2466124C908BC00BD73F4 /* To_DoTests.swift */; };
 		90D2466D24C908BC00BD73F4 /* To_DoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D2466C24C908BC00BD73F4 /* To_DoUITests.swift */; };
+		90D2467B24CB585800BD73F4 /* TasksDone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D2467A24CB585800BD73F4 /* TasksDone.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		90D2466824C908BC00BD73F4 /* To-DoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "To-DoUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		90D2466C24C908BC00BD73F4 /* To_DoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = To_DoUITests.swift; sourceTree = "<group>"; };
 		90D2466E24C908BC00BD73F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		90D2467A24CB585800BD73F4 /* TasksDone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksDone.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,7 @@
 				90D2464724C908B900BD73F4 /* AppDelegate.swift */,
 				90D2464924C908B900BD73F4 /* SceneDelegate.swift */,
 				90D2464E24C908B900BD73F4 /* ContentView.swift */,
+				90D2467A24CB585800BD73F4 /* TasksDone.swift */,
 				90D2465024C908BB00BD73F4 /* Assets.xcassets */,
 				90D2465524C908BB00BD73F4 /* LaunchScreen.storyboard */,
 				90D2465824C908BB00BD73F4 /* Info.plist */,
@@ -272,6 +275,7 @@
 			files = (
 				90D2464D24C908B900BD73F4 /* To_Do.xcdatamodeld in Sources */,
 				90D2464824C908B900BD73F4 /* AppDelegate.swift in Sources */,
+				90D2467B24CB585800BD73F4 /* TasksDone.swift in Sources */,
 				90D2464F24C908B900BD73F4 /* ContentView.swift in Sources */,
 				90D2464A24C908B900BD73F4 /* SceneDelegate.swift in Sources */,
 			);
