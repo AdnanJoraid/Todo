@@ -13,10 +13,11 @@ var rowHeight : CGFloat = 50 //-> the height for the dynamic rows
 struct ContentView: View {
     @Environment(\.managedObjectContext) var managedObjectContext //accessing device's internal storage
     @FetchRequest(entity: Tasks.entity() , sortDescriptors: [NSSortDescriptor(keyPath: \Tasks.dateCreated, ascending: false)], predicate: NSPredicate(format: "taskDone = %d", false))
-     var fetchedItems : FetchedResults<Tasks>
+    var fetchedItems : FetchedResults<Tasks>
     
-    @State var newTask = "" //-> stores user's new tasks
-   
+    @State var newTaskTitle = "" //-> stores user's new tasks
+    
+    
     
     var body: some View {
         NavigationView{
@@ -26,14 +27,18 @@ struct ContentView: View {
                     HStack {
                         Text(item.taskTitle ?? "Empty")
                         Spacer()
-                        Image(systemName: "square")
-                            .imageScale(.large)
-                            .foregroundColor(.gray)
+                        Button(action: {self.markDoneTasks(at: self.fetchedItems.firstIndex(of: item)!)}){
+                            Image(systemName: "square")
+                                .imageScale(.large)
+                                .foregroundColor(.gray)
+                            
+                        }
+                        
                     }
                 } .frame(height: rowHeight)
                 
                 HStack {
-                    TextField("Add task...", text: $newTask, onCommit: {print("new Task titles entered")})
+                    TextField("Add task...", text: $newTaskTitle, onCommit: {self.saveTasks()})
                     Image(systemName: "plus")
                         .imageScale(.large)
                         .foregroundColor(.blue)
@@ -44,9 +49,37 @@ struct ContentView: View {
                 
             }
             .navigationBarTitle(Text("To-Do"))
-            .listStyle(GroupedListStyle()) //remove the separators below the last line
+                .listStyle(GroupedListStyle()) //remove the separators below the last line
         }
         
+    }
+    
+    func saveTasks(){
+        //preventing the user from adding a task with a null title. 
+        guard self.newTaskTitle != "" else {
+            return
+        }
+        let newTaskItem = Tasks(context: self.managedObjectContext)
+        newTaskItem.taskTitle = self.newTaskTitle
+        newTaskItem.dateCreated = Date()
+        newTaskItem.taskDone = false
+        
+        do {
+            try self.managedObjectContext.save()
+        } catch {
+            print(error.localizedDescription)
+        }
+        self.newTaskTitle = ""
+    }
+    
+    func markDoneTasks(at index: Int){
+        let item = fetchedItems[index]
+        item.taskDone = true
+        do {
+            try self.managedObjectContext.save()
+        } catch {
+            print(error.localizedDescription)
+        }
     }
 }
 
