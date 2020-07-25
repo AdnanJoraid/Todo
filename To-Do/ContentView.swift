@@ -49,14 +49,14 @@ struct ContentView: View {
                 }.frame(height: rowHeight)
                 
                 NavigationLink(destination: TasksDone()) {
-                    Text("tasks done")
+                    Text("Tasks done")
                         .frame(height: rowHeight)
                 }
                 
                 
             }
             .navigationBarTitle(Text("To-Do"))
-                .listStyle(GroupedListStyle()) //remove the separators below the last line
+               // .listStyle(GroupedListStyle()) //remove the separators below the last line
             .navigationBarItems(trailing: EditButton())
         }
         

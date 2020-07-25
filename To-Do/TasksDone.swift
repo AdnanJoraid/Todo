@@ -35,7 +35,7 @@ struct TasksDone: View {
             
             
         }
-        .navigationBarTitle(Text("tasks done"))
+        .navigationBarTitle(Text("Tasks done"))
         .listStyle(GroupedListStyle())
     }
     
