@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-var rowHeight : CGFloat = 50 //-> the height for the dynamic rows
+let rowHeight : CGFloat = 50 //-> the height for the dynamic rows
 
 struct ContentView: View {
     @Environment(\.managedObjectContext) var managedObjectContext //accessing device's internal storage
