@@ -1,5 +1,5 @@
 # Todo
-To-Do iOS app that uses CoreData Framework for storing user's data permanently for offline uses. 
+To-Do iOS app that uses CoreData Framework for storing user's tasks permanently for offline uses. 
 
 ## The app is capable of: 
  - Adding new tasks
